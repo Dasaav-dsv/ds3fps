@@ -26,6 +26,9 @@ volatile extern bool* pIsFPS = &IsFPS;
 volatile extern bool ToggleRunFPS = false;
 volatile extern bool* pToggleRunFPS = &ToggleRunFPS;
 
+volatile extern bool IsBinocsFPS = false;
+volatile extern bool* pIsBinocsFPS = &IsBinocsFPS;
+
 volatile extern bool CamInit = false;
 
 volatile extern alignas(16) std::atomic<float> dT = 0.0f;

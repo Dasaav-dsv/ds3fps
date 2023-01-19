@@ -16,7 +16,7 @@
 const static void* pInitializeCamera = &InitializeCamera;
 const static void* pDeinitializeCamera = &DeinitializeCamera;
 const static void* pPerspectiveSwitch = &PerspectiveSwitch;
-const static void* pGenerateInputPointers = &GenerateInputPointers;
+//const static void* pGenerateInputPointers = &GenerateInputPointers;
 const static void* pGetTAEData = &GetTAEData;
 const static void* pAttachToHead = &AttachToHead;
 const static void* pPatchMsgRepo = &PatchMsgRepo;

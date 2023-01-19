@@ -149,12 +149,12 @@ extern void AttachToHead()
 
 	if (isEngLang)
 	{
-		sens_cam = static_cast<double>(*reinterpret_cast<float*>(TraversePtr(MouseSensPtr))) * 0.1 + 0.5;
+		sens_cam = static_cast<double>(*reinterpret_cast<float*>(TraversePtr(MouseSensPtr))) * 0.1 + 0.8;
 	}
 	else
 	{
-		sens_mouse = static_cast<double>(*reinterpret_cast<float*>(TraversePtr(MouseSensPtr))) * 0.1 + 0.5;
-		sens_pad = static_cast<double>(*reinterpret_cast<float*>(TraversePtr(PadSensPtr))) + 0.5;
+		sens_mouse = static_cast<double>(*reinterpret_cast<float*>(TraversePtr(MouseSensPtr))) * 0.1 + 0.8;
+		sens_pad = static_cast<double>(*reinterpret_cast<float*>(TraversePtr(PadSensPtr))) + 0.8;
 	}
 
 	if (MaxRotationHdegs != INFINITY)

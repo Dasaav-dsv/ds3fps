@@ -103,7 +103,21 @@ extern void GetTAEData()
 			TrackHeadLocalOverride = true;
 			break;
 		case 307:
-			TrackHeadLocal = *reinterpret_cast<uint32_t*>(TraversePtr(EventTAECurrentPtr, 0x18)) != 504 || track_roll;
+			if (*reinterpret_cast<uint32_t*>(TraversePtr(EventTAECurrentPtr, 0x18)) == 504)
+			{
+				if ((CurrentAnimationID - CurrentAnimationID / 10 * 10) == 2 || (CurrentAnimationID - CurrentAnimationID / 10 * 10) == 3)
+				{
+					TrackHeadLocal = false;
+				}
+				else
+				{
+					TrackHeadLocal = track_roll;
+				}
+			}
+			else
+			{
+				TrackHeadLocal = true;
+			}
 			break;
 		case 224:
 			if (CheckTAETime(AnimTime, CurrentEventStartTime, CurrentEventEndTime) && MaxRotationLocal == INFINITY)
@@ -119,15 +133,15 @@ extern void GetTAEData()
 		}
 	}
 
-	if (CurrentAnimationID >= 28000 && CurrentAnimationID < 29000) // ladder animations
-	{
-		MaxRotationLocal = 0.0f;
-		goto AnimIDCheckEnd;
-	}
-
 	if (!(CurrentAnimationID >= 5300 && CurrentAnimationID < 5310) && ((CurrentAnimationID >= 5000 && CurrentAnimationID < 5500) || CurrentAnimationID >= 10000 && CurrentAnimationID < 15000)) // small hurt animations check
 	{
 		TrackHeadLocal = false;
+		goto AnimIDCheckEnd;
+	}
+
+	if (CurrentAnimationID >= 28000 && CurrentAnimationID < 29000) // ladder animations
+	{
+		MaxRotationLocal = 0.0f;
 		goto AnimIDCheckEnd;
 	}
 
@@ -138,6 +152,18 @@ extern void GetTAEData()
 	}
 	else
 	{
+		SyncRot = true;
+	}
+
+	if (CurrentAnimationID == 50091)
+	{
+		IsBinocsFPS = true;
+		SyncRot = false;
+		goto AnimIDCheckEnd;
+	}
+	else
+	{
+		IsBinocsFPS = false;
 		SyncRot = true;
 	}
 

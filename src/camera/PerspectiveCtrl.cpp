@@ -34,7 +34,6 @@ extern void CameraFPS()
 		VxD::write_umtx(rend_mtx);
 	}
 	SetEventFlag(*reinterpret_cast<void**>(SprjEventFlagMan), 1099, true, 0);
-	*TraversePtr(CamModePtr) = 3;
 	*TraversePtr(LbStrafePtr) = 0;
 
 	*reinterpret_cast<float*>(TraversePtr(FOVZoom2Ptr)) = RADf(125.0f);

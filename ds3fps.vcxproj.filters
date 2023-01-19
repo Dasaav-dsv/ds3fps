@@ -671,8 +671,10 @@
   <ItemGroup>
     <None Include="BuildInfo\BuildInfo.aps" />
     <None Include="x64\Release\FPS.ini" />
+    <None Include="FPS.ini" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="x64\Release\FPS README.txt" />
+    <Text Include="FPS README.txt" />
   </ItemGroup>
 </Project>

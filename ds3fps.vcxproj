@@ -244,9 +244,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="BuildInfo\BuildInfo.aps" />
+    <None Include="FPS.ini" />
     <None Include="x64\Release\FPS.ini" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="FPS README.txt" />
     <Text Include="x64\Release\FPS README.txt" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

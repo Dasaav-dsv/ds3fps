@@ -1,6 +1,4 @@
-﻿# Dark Souls 3 [FPS] - First Person Souls Conversion Mod
-
-# DESCRIPTION
+DESCRIPTION
 
 ﻿Immerse yourself in the world of Dark Souls 3 as seen from your own eyes. First Person Souls for Dark Souls 3 offers a unique opportunity to (re)play the game from a new perspective.
 
@@ -12,7 +10,7 @@ The mod includes custom configuration options in Dark Souls 3's own settings men
 As a standalone, single file .dll mod, two of the aims of FPS are compatibility with many other mods and game versions (see "compatibility") and ease of installation (see "installation"). Powered by C++ and a custom SIMD vector library (requires a CPU with SSE 4.1 support), the mod should have no impact on performance. It is completely open source and licensed under MIT. Consult the FAQ for questions about safety of online play and bans.
 
 
-# INSTALLATION 
+INSTALLATION 
 
 * Simple (no other dinput8.dll mods):
 Download the latest FPS version from the Files tab or from Github and unpack the archive
@@ -26,14 +24,14 @@ Put FPS.ini from the FPS directory into "DARK SOULS III\Game"
 Rename dinput8.dll from the FPS directory into FPS.dll and put it into "DARK SOULS III\Game\dllMods"
 Put the other mods' .dll files into dllMods, renaming them if necessary, or follow the Lazy Loader instructions on the mods' pages. 
 
-# COMPATIBILITY
+COMPATIBILITY
 
 This mod is designed for maximum compatibility. It should work together with most other mods, such as Cinders, Convergence, Honest Merchant, randomizer mods, .dll mods (check "Installation" for a guide on how to install FPS together with other dinput8.dll mods), etc.
 
 It is not compatible with mods that affect the camera or majorly impact the structure of the same game functions this mod uses. Compatibility with any presently released Dark Souls 3 version is possible, but not guaranteed for versions below 1.15.0.
 
 
-# HOW TO USE
+HOW TO USE
 
 * In game:
 While in the default camera state (3rd person) press and hold your lock on button, whether it is on your mouse or controller, to enter 1st person
@@ -51,7 +49,7 @@ Track on Hit - Toggle head tracking for heavy hits, i.e. hits that make your cha
 Debug Console Output - Print information for debugging into console
 Use VirtualAlloc2 - FPS uses the VA2 function for its speed and reliability. Not all operatating systems support it, so there is a fallback function, plus the option to disable VirtualAlloc2 altogether.
 
-# FEATURES
+FEATURES
 
 Head tracking - select animations have full head tracking, which means the camera moves and rotates together with the head, while retaining its own degree of movement. Head tracking greatly enhances immersion and the weight of the animations. Head tracking for rolls and heavy hits is optional, and can be turned off in the in-game settings and FPS.ini respectively
 
@@ -70,7 +68,7 @@ View model system - automatic camera position adjustments based on equipped gear
 In-game settings - in-game configuration of FOV and whether to enable head tracking for dodges
 
 
-# F.A.Q. (Frequently Asked Questions)
+F.A.Q. (Frequently Asked Questions)
 
 "Can I play this mod online?"
 - Yes, however it IS CURRENTLY NOT SAFE FOR ONLINE PLAY. It is a priority issue for me, expect a fix next week. For now, for online play use ds3os﻿, Painted Worlds﻿, play on the banned servers or create a new steam alt account and use family share.

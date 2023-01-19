@@ -196,33 +196,8 @@ extern void InjectAsm()
 	a.int3();
 	InitAsm(code, GetTAEAOB, CodeMemFree, 2);
 
-	/*
-	code.init(env);
-	code.attach(&a);
-	a.mov(x86::rax, x86::ptr(x86::r14));
-	a.mov(x86::ptr(x86::rcx), x86::rax);
-	a.test(x86::r15, x86::r15);
-	a.je(GenInputPtrAOB + 6);
-	PUSH;
-	a.mov(x86::rcx, &InputPtrBase);
-	a.mov(x86::qword_ptr(x86::rcx), x86::rax);
-	a.mov(x86::rax, reinterpret_cast<uint64_t>(&pGenerateInputPointers));
-	a.call(x86::qword_ptr(x86::rax));
-	POP;
-	a.jmp(GenInputPtrAOB + 6);
-	a.int3();
-	InitAsm(code, GenInputPtrAOB, CodeMemFree, 1);
-	*/
-
-	code.init(env);
-	code.attach(&a);
-	a.mov(x86::ecx, 0x3E);
-	a.cmp(x86::edx, 0x1770);
-	a.jne(GenMsgCodeAOB + 5);
-	a.mov(x86::edx, 0xA8F);
-	a.jmp(GenMsgCodeAOB + 5);
-	a.int3();
-	InitAsm(code, GenMsgCodeAOB, CodeMemFree);
+	const uint8_t GenMsg_buf[] = { 0x31, 0xFF };
+	memcpy(GenMsgCodeAOB, GenMsg_buf, 2);
 
 	if (FallDeathCodeAOB != nullptr)
 	{
@@ -415,21 +390,26 @@ extern void InjectAsm()
 
 	code.init(env);
 	code.attach(&a);
+	Label AFC_retjmp = a.newLabel();
 	a.cmovbe(x86::rax, x86::rcx);
 	a.mov(x86::eax, x86::dword_ptr(x86::rax));
 	PUSHR;
 	a.mov(x86::rax, pIsFPS);
 	a.cmp(x86::byte_ptr(x86::rax), 1);
-	POPR;
-	a.jne(AimFadeCodeAOB + 6);
-	PUSHR;
+	a.jne(AFC_retjmp);
+	a.mov(x86::rax, pIsBinocsFPS);
+	a.cmp(x86::byte_ptr(x86::rax), 1);
+	a.je(AFC_retjmp);
 	a.mov(x86::rax, WorldChrMan);
 	a.mov(x86::rax, x86::ptr(x86::rax));
 	a.mov(x86::rax, x86::ptr(x86::rax, 0x80));
 	a.cmp(x86::rdi, x86::rax);
+	a.jne(AFC_retjmp);
 	POPR;
-	a.jne(AimFadeCodeAOB + 6);
-	a.mov(x86::eax, 0x3F800000);
+	a.mov(x86::eax, 0x3F800000); // 1.0f
+	a.jmp(AimFadeCodeAOB + 6);
+	a.bind(AFC_retjmp);
+	POPR;
 	a.jmp(AimFadeCodeAOB + 6);
 	a.int3();
 	InitAsm(code, AimFadeCodeAOB, CodeMemFree, 1);

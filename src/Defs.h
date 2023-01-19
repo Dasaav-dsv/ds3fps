@@ -51,6 +51,9 @@ volatile extern bool* pIsFPS;
 volatile extern bool ToggleRunFPS;
 volatile extern bool* pToggleRunFPS;
 
+volatile extern bool IsBinocsFPS;
+volatile extern bool* pIsBinocsFPS;
+
 volatile extern bool CamInit;
 
 volatile extern alignas(16) std::atomic<float> dT;
