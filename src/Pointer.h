@@ -214,11 +214,6 @@ extern PDATA RunPressTimePtr[4];
 
 extern PDATA LockOnPressStatePadPtr[20];
 extern PDATA LockOnPressStateMousePtr[7];
-extern PDATA LockOnPressStateUniversalPtr[15];
-extern PDATA LockOnPressStateUniversalOffsetPtr[17]; // alt: 12
-
-extern PDATA InteractPressStateUniversalPtr[15];
-extern PDATA InteractPressStateUniversalOffsetPtr[17];
 
 extern PDATA BoneOffsetPtr[6];
 
