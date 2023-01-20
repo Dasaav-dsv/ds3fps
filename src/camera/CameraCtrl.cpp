@@ -189,12 +189,9 @@ extern void AttachToHead()
 	V4D2 va = vbr.cross(vc).normalize();
 	V4D2 vb = vc.cross(va).normalize();
 
-	const bool IsLockHeld = *TraversePtr(LockOnPressStateMousePtr) == 1 || *TraversePtr(LockOnPressStatePadPtr) == 1;
+	const bool IsInteract = *TraversePtr(InteractPressStateUniversalPtr, *reinterpret_cast<uint32_t*>(TraversePtr(InteractPressStateUniversalOffsetPtr)) * 4) == 0;
 
-	if (*TraversePtr(MenuStatePtr) == 0 && IsLockHeld)
-	{
-		MaxRotationHdegs = 0;
-	}
+	double max_look_h = TrackHeadLocal ? max_look_htrack : MaxRotationHdegs != INFINITY ? max_look_hlocked : max_look_hfree;
 
 	if (TrackHeadLocal)
 	{
@@ -237,7 +234,7 @@ extern void AttachToHead()
 
 	V4D2 vcproj = V4D2(vc[0] - vcb[0], vc[1] - vcb[1], vc[2] - vcb[2]);
 	double vcprojL = vcproj.length();
-	const double cosMLV = cos(max_look_vertical);
+	const double cosMLV = cos(max_look_v);
 
 	if (vcprojL == 0)
 	{
@@ -255,7 +252,7 @@ extern void AttachToHead()
 	vcc = vcproj.component2V(vcr);
 	vcb *= 1 / vcprojL;
 
-	if (VxD::sign2V(vcc, vcr) == -1 && !RunState)
+	if (VxD::sign2V(vcc, vcr) == -1 && MaxRotationHdegs != INFINITY && !RunState)
 	{
 		vcproj = var * vca.sign2V(var);
 	}
@@ -264,29 +261,31 @@ extern void AttachToHead()
 	vca = vcprojcy.component2V(var);
 	vcc = vcprojcy.component2V(vcr);
 
-	if (!(RunState || RunTimeout > 0.0f))
+	if (RunState || RunTimeout > 0.0f)
 	{
-		const double vcaL = vca.length();
-		const double sinMLH = TrackHeadLocal ? sin(RAD(30.0)) : sin(max_look_horizontal);
+		max_look_h = max_look_hfree;
+	}
 
+	const double vcaL = vca.length();
+	const double sinMLH = sin(max_look_h);
+
+	if (max_look_h < M_PI * 0.5)
+	{
 		if (vcaL > sinMLH)
 		{
 			const double k = sinMLH * vca.sign2V(var);
 			vca = var * k;
-			const double cosMLH = TrackHeadLocal ? cos(RAD(30.0)) : cos(max_look_horizontal);
+			const double cosMLH = cos(max_look_h);
 			vcc = vcr * cosMLH;
 		}
 	}
 	else if (VxD::sign2V(vcc, vcr) == -1)
 	{
-		const double vcaL = vca.length();
-		const double sinMLH = sin(RAD(135.0));
-
 		if (vcaL < sinMLH)
 		{
 			const double k = sinMLH * vca.sign2V(var);
 			vca = var * k;
-			const double cosMLH = cos(RAD(135.0));
+			const double cosMLH = cos(max_look_hfree);
 			vcc = vcr * cosMLH;
 		}
 	}
@@ -307,7 +306,7 @@ extern void AttachToHead()
 	V4D2 vb2 = { 0, 1, 0 };
 	V4D2 vc2 = { -sinPRot, 0, -cosPRot };
 
-	const double max_vAng = max_look_vertical * 0.8;
+	const double max_vAng = max_look_v * 0.8;
 	const double vAng = std::clamp(-atan2(vc[1], sqrt(vc[0] * vc[0] + vc[2] * vc[2])), -max_vAng, max_vAng);
 	V4D2 Q_V = V4D2(va2, vAng);
 
@@ -329,10 +328,10 @@ extern void AttachToHead()
 
 	vd2 += vc2 * -0.04;
 
-	if (!(IsLockHeld || TrackHeadLocal))
+	if (!(IsInteract || TrackHeadLocal))
 	{
 		VxD2::write_vmtx(va2, vb2, vc2, vd2, base_mtx); 
-		if (MovementInput.length() < 0.37 && MaxRotationHdegs == INFINITY && !RunState && !ObjActState && SyncRot)
+		if (MovementInput.length() < 0.37 && MaxRotationHdegs == INFINITY && !IsInteract && !RunState && !ObjActState && SyncRot)
 		{
 			*pPRot = PRot;
 		}
