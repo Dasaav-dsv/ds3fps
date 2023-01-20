@@ -2,6 +2,8 @@
 
 #include "TAE.h"
 
+static float SyncTime = 0.0f;
+
 static const PDATA TAEHeaderPtr[] = {&TAE_PtrBase, 0x8, 0x18, 0x0};
 static const PDATA EventCountPtr[] = {&TAE_PtrBase, 0x20};
 static const PDATA EventTAEBasePtr[] = {&TAE_PtrBase, 0x0, 0x0};
@@ -31,6 +33,7 @@ extern void GetTAEData()
 
 	uint32_t CurrentAnimationID = *reinterpret_cast<uint32_t*>(TraversePtr(AnimIDPtr));
 	CurrentAnimationID = CurrentAnimationID - CurrentAnimationID / 100000 * 100000;
+	const uint32_t CurrentAnimationIndex = CurrentAnimationID - CurrentAnimationID / 10 * 10;
 	const float AnimTime = *reinterpret_cast<float*>(TraversePtr(AnimTimePtr));
 
 	const void* TAEHeader = reinterpret_cast<void*>(TraversePtr(TAEHeaderPtr));
@@ -105,9 +108,9 @@ extern void GetTAEData()
 		case 307:
 			if (*reinterpret_cast<uint32_t*>(TraversePtr(EventTAECurrentPtr, 0x18)) == 504)
 			{
-				if ((CurrentAnimationID - CurrentAnimationID / 10 * 10) == 2 || (CurrentAnimationID - CurrentAnimationID / 10 * 10) == 3)
+				if ((CurrentAnimationIndex == 2 || CurrentAnimationIndex == 3) && track_roll)
 				{
-					TrackHeadLocal = false;
+					SyncTime = 0.25f;
 				}
 				else
 				{
@@ -177,5 +180,15 @@ AnimIDCheckEnd:
 	TrackHeadLocal = NoSyncAnimationIDs[CurrentAnimationID] ? false : TrackHeadLocal;
 
 	MaxRotation.exchange(MaxRotationLocal);
-	TrackHead = TrackHeadLocal || TrackHeadLocalOverride;
+
+	if (SyncTime > 0.0)
+	{
+		SyncTime -= dT.load();
+		TrackHead = true;
+	}
+	else
+	{
+		SyncTime = 0.0;
+		TrackHead = TrackHeadLocal || TrackHeadLocalOverride;
+	}
 }
