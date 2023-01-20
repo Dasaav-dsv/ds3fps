@@ -34,9 +34,9 @@ It is not compatible with mods that affect the camera or majorly impact the stru
 HOW TO USE
 
 * In game:
-While in the default camera state (3rd person) press and hold your lock on button, whether it is on your mouse or controller, to enter 1st person
-In 1st person, lock on enables free look mode, which disconnects camera movement from character rotation while held
-Tapping lock on in 1st person puts the camera back into 3rd person
+While in the default camera state (3rd person) press and hold your lock on button, whether it is on your keyboard, mouse or controller, to enter 1st person
+In 1st person, holding interact enables free look mode, which disconnects camera movement from character rotation while held
+While in 1st person press and hold your lock on button, whether it is on your keyboard, mouse or controller, to return to 3rd person
 Additional settings are available under the Camera tab in the game's settings menu: 
 ﻿﻿Track Dodges - Toggle head tracking for dodges, i.e. rolls and quickstep (this setting overrides the .ini setting of ﻿﻿﻿the same name)
 ﻿﻿FOV - The actual field of view of the 1st person camera
@@ -57,7 +57,7 @@ Strafe movement - completely new in Dark Souls: not strafing relative to the loc
 
 Middle-of-screen aim - melee swings, shots, spells, thrown items and other attacks aim towards the middle of the screen. This makes accurate aim easily achievable, no matter the case. Use the firearm mod for a true first person shooter experience﻿
  
-Free look - holding the lock on keybind in 1st person enables free look, which completely disconnects camera movement from player rotation. While running, the span of the angle you can look at is greater
+Free look - holding the interact key in 1st person enables free look, which completely disconnects camera movement from player rotation
 
 Smooth 1st person running - I believe I achieved a great compromise between the free range of movement running in 3rd person and the additional control in 1st person
 
