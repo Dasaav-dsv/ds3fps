@@ -7,8 +7,11 @@ extern bool track_hit = true;
 extern bool test_out = false;
 extern bool use_virtualalloc2 = true;
 
-extern const double max_look_vertical = RAD(70.0);
-extern const double max_look_horizontal = RAD(70.0);
+extern const double max_look_v = RAD(70.0);
+
+extern const double max_look_htrack = RAD(30.0);
+extern const double max_look_hlocked = RAD(80.0);
+extern const double max_look_hfree = RAD(135.0);
 
 extern volatile double cam_adjust_height = 0.03;
 extern volatile double cam_adjust_horizontal = 0.01;

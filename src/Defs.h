@@ -33,8 +33,11 @@ extern bool track_hit;
 extern bool test_out;
 extern bool use_virtualalloc2;
 
-extern const double max_look_vertical;
-extern const double max_look_horizontal;
+extern const double max_look_v;
+
+extern const double max_look_htrack;
+extern const double max_look_hlocked;
+extern const double max_look_hfree;
 
 extern volatile double cam_adjust_height;
 extern volatile double cam_adjust_horizontal;
