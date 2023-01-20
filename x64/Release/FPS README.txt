@@ -71,13 +71,13 @@ In-game settings - in-game configuration of FOV and whether to enable head track
 F.A.Q. (Frequently Asked Questions)
 
 "Can I play this mod online?"
-- Yes, however it IS CURRENTLY NOT BAN SAFE. It is a priority issue for me, expect a fix next week. For now, for online play use ds3os﻿, Painted Worlds﻿, play on the banned servers or create a new steam alt account and use family share.
+- Yes, however it IS CURRENTLY NOT SAFE FOR ONLINE PLAY. It is a priority issue for me, expect a fix next week. For now, for online play use ds3os﻿, Painted Worlds﻿, play on the banned servers or create a new steam alt account and use family share.
 
 "Why is there no lock on in 1st person?"
 - I have decided to remove lock on in 1st person as it interfered with movement and camera mechanics and was widely unnecessary with all the advantages a first person camera brings.
 
 "Why does the mod function best in English? Will there be translations?"
-- The custom settings options would have to be translated to other languages and fucntion on the principle of string replacement. I can't anticipate and replace the strings in every language. I leave translating the mod to others, who are free to do so and post it, provided they credit my work.
+- The custom settings options would have to be translated to other languages and function on the principle of string replacement. I can't anticipate and replace the strings in every language. I leave translating the mod to others, who are free to do so and post it, provided they credit my work.
 
 "Why does my shadow have no head?"
 - Due to technical limitations I cannot hide the head while preserving the shadow.
