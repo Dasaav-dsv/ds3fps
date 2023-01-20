@@ -43,6 +43,9 @@ extern void CameraFPS()
 	IsFPS = true;
 }
 
+static float PressTime = 0.0f;
+static bool PressState = false;
+
 extern void Camera3PS()
 {
 	if (!CamInit)
@@ -76,10 +79,10 @@ extern void PerspectiveSwitch()
 	float _dT = *reinterpret_cast<float*>(TraversePtr(DtPtr));
 	dT.exchange(_dT);
 
-	if ((*TraversePtr(LockOnPressStatePadPtr) == 1 || *TraversePtr(LockOnPressStateMousePtr) == 1) && *TraversePtr(MenuStatePtr) == 0)
+	if (*TraversePtr(LockOnPressStateUniversalPtr, *reinterpret_cast<uint32_t*>(TraversePtr(LockOnPressStateUniversalOffsetPtr)) * 4) == 0 && *TraversePtr(MenuStatePtr) == 0)
 	{
 		PressTime += _dT;
-		if (!(IsFPS || SyncPressState == 1))
+		if (!(IsFPS || PressState))
 		{
 			if (PressTime > 0.2f)
 			{
@@ -87,21 +90,24 @@ extern void PerspectiveSwitch()
 			}
 			if (PressTime > 0.3f && *TraversePtr(LockMode1Ptr) == 0 && *TraversePtr(LockMode2Ptr) == 0)
 			{
-				SyncPressState = 1;
+				PressState = true;
 				CameraFPS();
 				return;
 			}
 		}
-		SyncPressState = 0;
-	}
-	else if (IsFPS and SyncPressState == 0 and PressTime < 0.18)
-	{
-		SyncPressState = 2;
-		Camera3PS();
+		else if (IsFPS && !PressState)
+		{
+			if (PressTime > 0.3f)
+			{
+				PressState = true;
+				Camera3PS();
+				return;
+			}
+		}
 	}
 	else
 	{
 		PressTime = 0.0f;
-		SyncPressState = 2;
+		PressState = false;
 	}
 }
