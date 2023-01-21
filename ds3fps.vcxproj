@@ -50,7 +50,6 @@
     <ClInclude Include="src\asm.h" />
     <ClInclude Include="src\camera\Camera.h" />
     <ClInclude Include="src\camera\CameraCtrl.h" />
-    <ClInclude Include="src\camera\Input.h" />
     <ClInclude Include="src\camera\PerspectiveCtrl.h" />
     <ClInclude Include="src\camera\InitializeCamera.h" />
     <ClInclude Include="src\camera\TAE.h" />
@@ -226,7 +225,6 @@
     <ClCompile Include="src\AOB.cpp" />
     <ClCompile Include="src\asm.cpp" />
     <ClCompile Include="src\camera\CameraCtrl.cpp" />
-    <ClCompile Include="src\camera\Input.cpp" />
     <ClCompile Include="src\camera\InitializeCamera.cpp" />
     <ClCompile Include="src\Console.cpp" />
     <ClCompile Include="src\MsgRepoPatch.cpp" />
