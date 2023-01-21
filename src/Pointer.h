@@ -207,9 +207,9 @@ extern PDATA LockMode1Ptr[2];
 extern PDATA LockMode2Ptr[2];
 extern PDATA LockModeDropPtr[2];
 
-extern PDATA MenuStatePtr[5];
+extern PDATA MenuStatePtr[4];
 extern PDATA ObjActStatePtr[4];
-extern PDATA RunPressStatePtr[5];
+extern PDATA RunPressStatePtr[4];
 extern PDATA RunPressTimePtr[4];
 
 extern PDATA LockOnPressStatePadPtr[20];
@@ -220,7 +220,7 @@ extern PDATA LockOnPressStateUniversalOffsetPtr[17]; // alt: 12
 extern PDATA InteractPressStateUniversalPtr[15];
 extern PDATA InteractPressStateUniversalOffsetPtr[17];
 
-extern PDATA BoneOffsetPtr[6];
+extern PDATA BoneOffsetPtr[7];
 
 extern PDATA MsgRepo1Ptr[5];
 extern PDATA MsgRepo2Ptr[5];

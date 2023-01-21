@@ -106,17 +106,6 @@ extern void InjectAsm()
 
 	code.init(env);
 	code.attach(&a);
-	PUSHR;
-	a.mov(x86::rax, &BoneOffsetBasePointer);
-	a.mov(x86::qword_ptr(x86::rax), x86::rcx);
-	POPR;
-	a.call(BOBP_CallAOB);
-	a.jmp(BoneOffsetBasePointerAOB + 5);
-	a.int3();
-	InitAsm(code, BoneOffsetBasePointerAOB, CodeMemFree);
-
-	code.init(env);
-	code.attach(&a);
 	PUSH;
 	a.mov(x86::rax, reinterpret_cast<uint64_t>(&pInitializeCamera));
 	a.call(x86::qword_ptr(x86::rax));
@@ -340,6 +329,7 @@ extern void InjectAsm()
 	code.init(env);
 	code.attach(&a);
 	Label Idle3 = a.newLabel();
+	Label HvkWStr = a.newLabel();
 	a.mov(x86::rcx, x86::rdi);
 	a.movzx(x86::edx, x86::ax);
 	a.mov(x86::rax, pIsFPS);
@@ -351,8 +341,13 @@ extern void InjectAsm()
 	a.cmp(x86::byte_ptr(x86::rax), 1);
 	a.jne(HkRunCodeAOB + 6);
 	a.cmp(x86::dl, 2);
-	a.mov(x86::eax, 1);
-	a.cmove(x86::edx, x86::eax);
+	a.jne(HkRunCodeAOB + 6);
+	a.mov(x86::rax, x86::ptr(x86::rdi, 0x30));
+	a.mov(x86::rax, x86::ptr(x86::rax, 0x10));
+	a.cmp(x86::qword_ptr(HvkWStr), x86::rax);
+	a.jne(HkRunCodeAOB + 6);
+	a.xor_(x86::edx, x86::edx);
+	a.inc(x86::edx);
 	a.jmp(HkRunCodeAOB + 6);
 	a.bind(Idle3);
 	a.mov(x86::rdx, WorldChrMan);
@@ -374,6 +369,9 @@ extern void InjectAsm()
 	a.mov(x86::dword_ptr(x86::rax, 0x140), 1);
 	a.jmp(HkRunCodeAOB + 6);
 	a.int3();
+	a.align(AlignMode::kZero, 0x10);
+	a.bind(HvkWStr);
+	a.embedUInt64(0x64006E00490064);
 	InitAsm(code, HkRunCodeAOB, CodeMemFree, 1);
 
 	code.init(env);
