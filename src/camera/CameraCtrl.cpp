@@ -166,6 +166,10 @@ extern void AttachToHead()
 	{
 		MouseInputLR = static_cast<double>(*reinterpret_cast<float*>(TraversePtr(MouseInputLRPtr))) * vcoPL * 0.0010 * sens_coeff * sens_mouse * sens_cam;
 		MouseInputUD = static_cast<double>(*reinterpret_cast<float*>(TraversePtr(MouseInputUDPtr))) * vcoPL * 0.0013 * sens_coeff * sens_mouse * sens_cam;
+
+		const uint16_t InvertMouseData = *reinterpret_cast<uint16_t*>(TraversePtr(InvertMouse, 0x715));
+		if ((InvertMouseData & 1) != 0) MouseInputUD *= -1;
+		if ((InvertMouseData & 256) != 0) MouseInputLR *= -1;
 	}	
 	else
 	{
@@ -173,8 +177,12 @@ extern void AttachToHead()
 		MouseInputUD = 0;
 	}
 
-	const double RStickInputLR = static_cast<double>(*reinterpret_cast<float*>(TraversePtr(RStickInputLRPtr))) * vcoPL * 0.075 * sens_coeff * sens_pad * sens_cam;
-	const double RStickInputUD = static_cast<double>(*reinterpret_cast<float*>(TraversePtr(RStickInputUDPtr))) * vcoPL * 0.100 * sens_coeff * sens_pad * sens_cam;
+	double RStickInputLR = static_cast<double>(*reinterpret_cast<float*>(TraversePtr(RStickInputLRPtr))) * vcoPL * 0.075 * sens_coeff * sens_pad * sens_cam;
+	double RStickInputUD = static_cast<double>(*reinterpret_cast<float*>(TraversePtr(RStickInputUDPtr))) * vcoPL * 0.100 * sens_coeff * sens_pad * sens_cam;
+
+	const uint16_t InvertPadData = *reinterpret_cast<uint16_t*>(TraversePtr(InvertPad, 0x12));
+	if ((InvertPadData & 1) == 0) RStickInputLR *= -1;
+	if ((InvertPadData & 256) == 0) RStickInputUD *= -1;
 
 	const double MovementInputLR = static_cast<double>(*reinterpret_cast<float*>(TraversePtr(MovementInputLRPtr)));
 	const double MovementInputUD = static_cast<double>(*reinterpret_cast<float*>(TraversePtr(MovementInputUDPtr)));

@@ -184,6 +184,9 @@ extern PDATA CamModePtr[3];
 extern PDATA AimCamModePtr[3];
 extern PDATA TrackDodgesPtr[4];
 
+extern PDATA InvertPad[3];
+extern PDATA InvertMouse[2];
+
 extern PDATA FOVPtr[4];
 extern PDATA FOV2Ptr[4];
 extern PDATA FOVZoomPtr[4];

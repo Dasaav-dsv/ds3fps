@@ -93,6 +93,9 @@ extern PDATA CamModePtr[] = { &FieldArea, 0x18, 0xE0 };
 extern PDATA AimCamModePtr[] = { &FieldArea, 0x28, 0x84 };
 extern PDATA TrackDodgesPtr[] = { &FieldArea, 0x28, 0x60, 0x2D2 };
 
+extern PDATA InvertPad[] = { &GameDataMan, 0x58, 0x0};
+extern PDATA InvertMouse[] = { &CSPcKeyConfig, 0x715 };
+
 extern PDATA FOVPtr[] = { &FieldArea, 0x18, 0xE8, 0x50 };
 extern PDATA FOV2Ptr[] = { &FieldArea, 0x28, 0x60, 0x50 };
 extern PDATA FOVZoomPtr[] = { &FieldArea, 0x28, 0x68, 0x50 };
