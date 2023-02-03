@@ -108,13 +108,13 @@ extern void GetTAEData()
 		case 307:
 			if (*reinterpret_cast<uint32_t*>(TraversePtr(EventTAECurrentPtr, 0x18)) == 504)
 			{
-				if ((CurrentAnimationIndex == 2 || CurrentAnimationIndex == 3) && track_roll)
+				if (track_roll)
 				{
 					SyncTime = 0.25f;
 				}
 				else
 				{
-					TrackHeadLocal = track_roll;
+					TrackHeadLocal = false;
 				}
 			}
 			else
