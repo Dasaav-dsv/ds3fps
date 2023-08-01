@@ -49,7 +49,7 @@ Base FOV - The base field of view of the 1st person camera. In in-game settings,
 Track Dodges - Toggle head tracking for dodges, i.e. rolls and quickstep
 Track on Hit - Toggle head tracking for heavy hits, i.e. hits that make your character lose balance
 Debug Console Output - Print information for debugging into console
-Use VirtualAlloc2 - FPS uses the VA2 function for its speed and reliability. Not all operatating systems support it, so there is a fallback function, plus the option to disable VirtualAlloc2 altogether.
+Use VirtualAlloc2 - FPS uses the VA2 function for its speed and reliability. Not all operating systems support it, so there is a fallback function, plus the option to disable VirtualAlloc2 altogether.
 
 # FEATURES
 
@@ -91,7 +91,7 @@ In-game settings - in-game configuration of FOV and whether to enable head track
 - Priority issue, will be addressed soon.
 
 "Why can I sometimes see the stump of my neck?"
-- You mostly can not, however disabling Tracking on Hit can lead to more occurences. It is a result of the neck bending in an unnatural angle in some animation, or being knocked over without head tracking.
+- You mostly can not, however disabling Tracking on Hit can lead to more occurrences. It is a result of the neck bending in an unnatural angle in some animation, or being knocked over without head tracking.
 
 
 
